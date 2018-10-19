@@ -17,6 +17,9 @@ public class Handler implements dedRunnable{
 		case 2:
 			R.battle.tick();
 			break;
+		case 3:
+			R.settings.tick();
+			break;
 		}
 	}
 	
@@ -30,6 +33,9 @@ public class Handler implements dedRunnable{
 			break;
 		case 2:
 			R.battle.superTick();
+			break;
+		case 3:
+			R.settings.superTick();
 			break;
 		}
 	}

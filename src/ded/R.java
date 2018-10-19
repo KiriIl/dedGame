@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ded.game.Input;
 import ded.game.state.Battle;
 import ded.game.state.Menu;
+import ded.game.state.Settings;
 import ded.game.state.World;
 import ded.game.unit.Ded;
 import ded.game.unit.Moskal;
@@ -23,6 +24,7 @@ public abstract class R {
 	public static Menu menu = new Menu();
 	public static World world = new World();
 	public static Battle battle = new Battle();
+	public static Settings settings = new Settings();
 	
 	public static Camera cam = new Camera();
 	

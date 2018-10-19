@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import ded.Img;
 import ded.R;
 import ded.game.state.Menu;
+import ded.game.state.Settings;
 import ded.game.unit.Ded;
 import ded.game.unit.Moskal;
 import ded.game.unit.Unit;
@@ -39,22 +40,17 @@ public class Render extends JComponent implements TileDrawer, UnitDrawer, dedRun
 		switch(R.state) {
 		case 0:
 			R.menu.render(g);
-			g.setColor(Color.WHITE);
-			g.drawString("Menu", 0, 40);
 			break;
 		case 1:
 			R.world.render(g);
-			g.setColor(Color.WHITE);
-			g.drawString("World", 0, 40);
 			break;
 		case 2:
 			R.battle.render(g);
-			g.setColor(Color.WHITE);
-			g.drawString("Battle", 0, 40);
+			break;
+		case 3:
+			R.settings.render(g);
 			break;
 		}
-		g.setColor(Color.WHITE);
-		g.drawString("State: "+R.state, 0, 20);
 	}
 
 	public void tick() {
@@ -89,6 +85,9 @@ public class Render extends JComponent implements TileDrawer, UnitDrawer, dedRun
 				g.drawImage(Img.MOSKAL, (int)R.cam.getX(x), (int)R.cam.getY(y), (int)R.cam.byDelta(w), (int)R.cam.byDelta(h), null);
 			}
 			break;
+		}
+		if(Settings.showHitboxes) {
+			unit.render(g, R.cam);
 		}
 	}
 	

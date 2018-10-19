@@ -5,22 +5,27 @@ import java.awt.Graphics;
 
 import ded.R;
 
-public class Menu implements State{
+public class Settings implements State{
 
 	//!!!!!!!!!!!
 	private int index = 0;
 	
+	public static boolean showHitboxes = false;
+	
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.WHITE);
-		g.drawString("Play", 100, 200);
-		g.drawString("Settings", 100, 215);
-		g.drawString("Exit", 100, 230);
+		g.drawString("Resolution: ", 100, 200);
+		g.drawString("Show hitboxes: " + showHitboxes, 100, 215);
+		g.drawString("Back", 100, 230);
 		g.drawPolygon(new int[]{80, 85, 80}, new int[]{190+(index*15), 195+(index*15), 200+(index*15)}, 3);
 	}
-	
+
+	@Override
 	public void tick() {
 		if(R.in.ESC.isClicked()) {
-			System.exit(1);
+			R.state = 0;
+			return;
 		}
 		
 		if(R.in.MOVE_DOWN.isClicked()) {
@@ -30,18 +35,18 @@ public class Menu implements State{
 		}else if(R.in.MOVE_RIGHT.isClicked() || R.in.ACCEPT.isClicked()) {
 			switch(index) {
 			case 0:
-				R.state = 1;
 				break;
 			case 1:
-				R.state = 3;
+				showHitboxes = !showHitboxes;
 				break;
 			case 2:
-				System.exit(1);
+				R.state = 0;
 				break;
 			}
 		}
 	}
-	
+
+	@Override
 	public void superTick() {
 		
 	}
