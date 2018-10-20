@@ -25,8 +25,10 @@ public class Menu implements State{
 		
 		if(R.in.MOVE_DOWN.isClicked()) {
 			index++;
+			if(index>2) index=0;
 		}else if(R.in.MOVE_UP.isClicked()) {
 			index--;
+			if(index<0) index=2;
 		}else if(R.in.MOVE_RIGHT.isClicked() || R.in.ACCEPT.isClicked()) {
 			switch(index) {
 			case 0:

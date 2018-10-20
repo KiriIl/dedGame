@@ -10,19 +10,24 @@ import framework.core.dedThread;
 
 public class DedAlesya {
 
-	private final String title = "Ded";
-	private final String version = "v0.0.1";
+	private static final String title = "Ded";
+	private static final String version = "v0.0.1";
 	
-	private JFrame gameFrame = new JFrame(title+" "+version);
+	private static Toolkit kit = Toolkit.getDefaultToolkit();
+	
+	public static JFrame gameFrame = new JFrame(title+" "+version);
 	
 	public static Render render;
 	public static Handler handler;
 	public static dedThread renderThread;
 	public static dedThread updateThread;
 	
+	public static void gameFrameUpdate() {
+		gameFrame.pack();
+		gameFrame.setLocation(kit.getScreenSize().width/2-render.getWidth()/2, kit.getScreenSize().height/2-render.getHeight()/2);
+	}
+	
 	public void init() {
-		Toolkit kit = Toolkit.getDefaultToolkit();
-		
 		render = new Render();
 		handler = new Handler();
 		renderThread = new dedThread("RENDER_THREAD: ", render);
