@@ -54,7 +54,7 @@ public class Battle implements State{
 			g.fillRect((int)effect.enemyX+11, 41, (int)((float)enemy.HP/enemyMaxHP*(99)), 9);
 			g.setColor(Color.GREEN);
 			g.fillRect((int)effect.dedX+191, 401, (int)((float)R.ded.HP/dedMaxHP*(99)), 9);
-			// формула - текущее хп/фулл хп * 100 аыпвпавпа
+			// формула - текущее хп/фулл хп * 100
 		}
 	}
 	
