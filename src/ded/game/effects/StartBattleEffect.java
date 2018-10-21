@@ -8,29 +8,33 @@ import ded.game.unit.Unit;
 import framework.game.Effect;
 
 public class StartBattleEffect extends Effect{
-
-	public float enemyX = 0;
-	public float dedX = 0;
 	
 	private short ready = -1;
 	
-	public StartBattleEffect(Unit enemy) {
-		enemyX = -enemy.w*4;
-		dedX = -R.ded.w*8;
+	private Unit enemy;
+	private Unit player;
+	
+	public StartBattleEffect(Unit player, Unit enemy) {
+		this.enemy = enemy;
+		this.player = player;
+		enemy.inBattleX = -enemy.w*4;
+		player.inBattleX = -R.ded.w*8;
+		enemy.inBattleY = 50;
+		player.inBattleY = 400;
 	}
 	
 	private void _tick() {
-		if(enemyX<450) {
-			enemyX+=5;
-			if(enemyX>450) {
-				enemyX = 450;
+		if(enemy.inBattleX<450) {
+			enemy.inBattleX+=5;
+			if(enemy.inBattleX>450) {
+				enemy.inBattleX = 450;
 				ready++;
 			}
 		}
-		if(dedX<10) {
-			dedX+=4f;
-			if(dedX>10) {
-				dedX = 10;
+		if(player.inBattleX<10) {
+			player.inBattleX+=4f;
+			if(player.inBattleX>10) {
+				player.inBattleX = 10;
 				ready++;
 			}
 		}

@@ -50,7 +50,7 @@ public class World implements State{
 			R.cam.y = -(R.ded.y*R.cam.delta-(DedAlesya.render.getHeight()/2-R.ded.h/2*R.cam.delta));
 			
 			if(R.test.getDistance(R.ded, true)<=48) {
-				Battle.start(R.test);
+				Battle.start(R.ded, R.test);
 				R.ded.x = 100;
 				R.ded.y = 50;
 				R.state = 2;
