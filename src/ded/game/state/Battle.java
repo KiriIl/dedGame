@@ -17,6 +17,7 @@ public class Battle implements State{
 	
 	//!!!!!!!!!!!!
 	private static int enemyMaxHP;
+	private static int dedMaxHP;
 	
 	//!!!!!!!!!!!
 	private int index = 0;
@@ -27,6 +28,7 @@ public class Battle implements State{
 		R.cam.delta = 1;
 		Battle.enemy = enemy;
 		enemyMaxHP = enemy.HP;
+		dedMaxHP = R.ded.HP;
 		effect = new StartBattleEffect(enemy);
 	}
 	
@@ -34,7 +36,6 @@ public class Battle implements State{
 		//Fill background
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, DedAlesya.render.getWidth(), DedAlesya.render.getHeight());
-		
 		g.setColor(new Color(10, 50, 50, 100));
 		g.fillOval((int)(effect.enemyX-20), 50+enemy.h*4-16, enemy.w*4+40, 30);
 		DedAlesya.render.drawUnit(g, enemy, effect.enemyX, 50, enemy.w*4, enemy.h*4);
@@ -46,6 +47,14 @@ public class Battle implements State{
 			
 			g.drawString("TEST TEST TEST", 510, 490);
 			g.drawPolygon(new int[]{490, 495, 490}, new int[]{480+(index*15), 485+(index*15), 490+(index*15)}, 3);
+			
+			g.drawRect((int)effect.enemyX+10, 40, 100, 10);
+			g.drawRect((int)effect.dedX+190,400,100,10);
+			g.setColor(Color.RED);
+			g.fillRect((int)effect.enemyX+11, 41, (int)((float)enemy.HP/enemyMaxHP*(99)), 9);
+			g.setColor(Color.GREEN);
+			g.fillRect((int)effect.dedX+191, 401, (int)((float)R.ded.HP/dedMaxHP*(99)), 9);
+			// формула - текущее хп/фулл хп * 100
 		}
 	}
 	
@@ -73,7 +82,6 @@ public class Battle implements State{
 			}
 		}
 	}
-	
 	public void superTick() {
 		effect.tick();
 	}
