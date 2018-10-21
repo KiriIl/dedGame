@@ -36,8 +36,6 @@ public class Battle implements State{
 		//Fill background
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, DedAlesya.render.getWidth(), DedAlesya.render.getHeight());
-		float per;
-		int percent;
 		g.setColor(new Color(10, 50, 50, 100));
 		g.fillOval((int)(effect.enemyX-20), 50+enemy.h*4-16, enemy.w*4+40, 30);
 		DedAlesya.render.drawUnit(g, enemy, effect.enemyX, 50, enemy.w*4, enemy.h*4);
@@ -56,7 +54,7 @@ public class Battle implements State{
 			g.fillRect((int)effect.enemyX+11, 41, (int)((float)enemy.HP/enemyMaxHP*(99)), 9);
 			g.setColor(Color.GREEN);
 			g.fillRect((int)effect.dedX+191, 401, (int)((float)R.ded.HP/dedMaxHP*(99)), 9);
-			// формула - текущее хп - фулл хп = %
+			// формула - текущее хп/фулл хп * 100
 		}
 	}
 	
