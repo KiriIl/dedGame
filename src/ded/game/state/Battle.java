@@ -35,7 +35,7 @@ public class Battle implements State{
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, DedAlesya.render.getWidth(), DedAlesya.render.getHeight());
 		g.setColor(new Color(10, 50, 50, 100));
-		g.fillOval((int)(enemy.inBattleX-20), 50+enemy.h*4-16, enemy.w*4+40, 30);
+		g.fillOval((int)(enemy.inBattleX-20), (int)(enemy.inBattleY+enemy.h*4-16), enemy.w*4+40, 30);
 		DedAlesya.render.drawUnit(g, enemy, enemy.inBattleX, enemy.inBattleY, enemy.w*4, enemy.h*4);
 		DedAlesya.render.drawUnit(g, player, player.inBattleX, player.inBattleY, player.w*8, player.h*8);
 		if(effect.isEnded()) {
@@ -94,6 +94,7 @@ public class Battle implements State{
 			R.state = 1;
 			R.cam.delta = 2;
 			enemy.HP = enemy.maxHP;
+			while(DedAlesya.updateThread.isLocked()) DedAlesya.updateThread.unlock();
 		}
 		effect.tick();
 	}
