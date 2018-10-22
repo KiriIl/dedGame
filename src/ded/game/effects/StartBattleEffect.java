@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import ded.DedAlesya;
 import ded.R;
 import ded.game.unit.Unit;
+import framework.game.Camera;
 import framework.game.Effect;
 
 public class StartBattleEffect extends Effect{
@@ -56,7 +57,7 @@ public class StartBattleEffect extends Effect{
 	}
 
 	@Override
-	public void render(Graphics g) {
+	public void render(Graphics g, Camera cam) {
 		
 	}
 	

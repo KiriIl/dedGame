@@ -64,7 +64,7 @@ public class Battle implements State{
 			g.setColor(Color.BLACK);
 			g.drawRect((int)battleCamera.getX(enemy.inBattleX+10), (int)battleCamera.getY(enemy.inBattleY-10), (int)battleCamera.byDelta(100), (int)battleCamera.byDelta(10));
 			g.drawRect((int)battleCamera.getX(player.inBattleX+190), (int)battleCamera.getY(player.inBattleY-10), (int)battleCamera.byDelta(100), (int)battleCamera.byDelta(10));
-		}
+		}else effect.render(g, battleCamera);
 	}
 
 	private boolean playerTurn = true;

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import ded.DedAlesya;
 import ded.game.unit.Unit;
+import framework.game.Camera;
 import framework.game.Effect;
 
 public class PunchEffect extends Effect{
@@ -21,8 +22,8 @@ public class PunchEffect extends Effect{
 		this.enemy = enemy;
 		startCasterX = caster.inBattleX;
 		startCasterY = caster.inBattleY;
-		if(caster.inBattleY>300) isEnemy = false;
-		else isEnemy = true;
+		if(caster.inBattleX>200) isEnemy = true;
+		else isEnemy = false;
 		
 		DedAlesya.updateThread.lock();
 	}
@@ -70,7 +71,7 @@ public class PunchEffect extends Effect{
 	}
 
 	@Override
-	public void render(Graphics g) {
+	public void render(Graphics g, Camera cam) {
 		
 	}
 
