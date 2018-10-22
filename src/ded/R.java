@@ -26,6 +26,7 @@ public abstract class R {
 	public static Battle battle = new Battle();
 	public static Settings settings = new Settings();
 	
+	//!REDO!
 	public static Camera cam = new Camera();
 	
 	public static Input in = new Input();
@@ -57,6 +58,6 @@ public abstract class R {
 				}
 			}
 		}
-		cam.delta = 2;
+		cam.delta = 1.5f;
 	}
 }

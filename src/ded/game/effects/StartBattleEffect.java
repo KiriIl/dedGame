@@ -17,24 +17,24 @@ public class StartBattleEffect extends Effect{
 	public StartBattleEffect(Unit player, Unit enemy) {
 		this.enemy = enemy;
 		this.player = player;
-		enemy.inBattleX = -enemy.w*4;
-		player.inBattleX = -R.ded.w*8;
+		enemy.inBattleX = -enemy.w*3;
+		player.inBattleX = -R.ded.w*6;
 		enemy.inBattleY = 50;
-		player.inBattleY = 400;
+		player.inBattleY = 300;
 	}
 	
 	private void _tick() {
-		if(enemy.inBattleX<450) {
+		if(enemy.inBattleX<410) {
 			enemy.inBattleX+=5;
-			if(enemy.inBattleX>450) {
-				enemy.inBattleX = 450;
+			if(enemy.inBattleX>410) {
+				enemy.inBattleX = 410;
 				ready++;
 			}
 		}
-		if(player.inBattleX<10) {
-			player.inBattleX+=4f;
-			if(player.inBattleX>10) {
-				player.inBattleX = 10;
+		if(player.inBattleX<20) {
+			player.inBattleX+=4.4f;
+			if(player.inBattleX>20) {
+				player.inBattleX = 20;
 				ready++;
 			}
 		}

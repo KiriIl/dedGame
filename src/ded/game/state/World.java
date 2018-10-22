@@ -14,7 +14,7 @@ public class World implements State{
 	public void render(Graphics g) {
 		R.map.render(g, DedAlesya.render, R.cam);
 		synchronized(R.unit) {
-			for(Unit unit: R.unit) DedAlesya.render.drawUnit(g, unit, 0, 0, 0, 0);
+			for(Unit unit: R.unit) DedAlesya.render.drawUnit(g, unit, unit.x, unit.y, unit.w, unit.h, R.cam);
 		}
 	}
 

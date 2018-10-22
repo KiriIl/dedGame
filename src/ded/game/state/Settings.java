@@ -20,6 +20,7 @@ public class Settings implements State{
 	 * 0-800x600
 	 * 1-1024x768
 	 * 2-1280x720
+	 * 3-320x240
 	 */
 	
 	public static int rezo = 0;
@@ -32,6 +33,8 @@ public class Settings implements State{
 			return "1024:768";
 		case 2:
 			return "1280:720";
+		case 3:
+			return "640:480";
 		}
 		return "N/A";
 	}
@@ -42,7 +45,7 @@ public class Settings implements State{
 			DedAlesya.render.setSize(800, 600);
 			DedAlesya.render.setPreferredSize(DedAlesya.render.getSize());
 			DedAlesya.gameFrameUpdate();
-			R.cam.delta = 2f;
+			R.cam.delta = 1.5f;
 			break;
 		case 1:
 			DedAlesya.render.setSize(1024, 768);
@@ -55,6 +58,12 @@ public class Settings implements State{
 			DedAlesya.render.setPreferredSize(DedAlesya.render.getSize());
 			DedAlesya.gameFrameUpdate();
 			R.cam.delta = 2.5f;
+			break;
+		case 3:
+			DedAlesya.render.setSize(640, 480);
+			DedAlesya.render.setPreferredSize(DedAlesya.render.getSize());
+			DedAlesya.gameFrameUpdate();
+			R.cam.delta = 1f;
 			break;
 		}
 	}
@@ -85,7 +94,7 @@ public class Settings implements State{
 			switch(index) {
 			case 0:
 				rezo++;
-				if(rezo>2) rezo = 0;
+				if(rezo>3) rezo = 0;
 				setRezolution();
 				break;
 			case 1:

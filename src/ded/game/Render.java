@@ -16,6 +16,7 @@ import ded.game.unit.Moskal;
 import ded.game.unit.Unit;
 import ded.game.unit.UnitDrawer;
 import framework.core.dedRunnable;
+import framework.game.Camera;
 import framework.game.map.Tile;
 import framework.game.map.TileDrawer;
 import framework.graph.ImageFactory;
@@ -65,29 +66,16 @@ public class Render extends JComponent implements TileDrawer, UnitDrawer, dedRun
 	private BufferedImage grass = ImageFactory.crop(texture, 0, 0, 16, 16);
 	private BufferedImage wall = ImageFactory.crop(texture, 16, 0, 16, 16);
 	
-	public void drawUnit(Graphics g, Unit unit, float x, float y, float w, float h) {
-		switch(R.state) {
-		case 0:
-			break;
-		case 1:
-			g.setColor(new Color(0, 0, 0, 90));
-			g.fillOval((int)R.cam.getX(unit.x), (int)R.cam.getY(unit.y+unit.h-4), (int)R.cam.byDelta(unit.w), (int)R.cam.byDelta(6));
-			if(unit instanceof Ded) {
-				g.drawImage(Img.DED, (int)R.cam.getX(unit.x), (int)R.cam.getY(unit.y), (int)R.cam.byDelta(unit.w), (int)R.cam.byDelta(unit.h), null);
-			}else if(unit instanceof Moskal) {
-				g.drawImage(Img.MOSKAL, (int)R.cam.getX(unit.x), (int)R.cam.getY(unit.y), (int)R.cam.byDelta(unit.w), (int)R.cam.byDelta(unit.h), null);
-			}
-			break;
-		case 2:
-			if(unit instanceof Ded) {
-				g.drawImage(Img.DED, (int)R.cam.getX(x), (int)R.cam.getY(y), (int)R.cam.byDelta(w), (int)R.cam.byDelta(h), null);
-			}else if(unit instanceof Moskal) {
-				g.drawImage(Img.MOSKAL, (int)R.cam.getX(x), (int)R.cam.getY(y), (int)R.cam.byDelta(w), (int)R.cam.byDelta(h), null);
-			}
-			break;
+	public void drawUnit(Graphics g, Unit unit, float x, float y, float w, float h, Camera cam) {
+		//g.setColor(new Color(0, 0, 0, 90));
+		//g.fillOval((int)cam.getX(unit.x), (int)cam.getY(unit.y+unit.h-4), (int)cam.byDelta(unit.w), (int)cam.byDelta(6));
+		if(unit instanceof Ded) {
+			g.drawImage(Img.DED, (int)cam.getX(x), (int)cam.getY(y), (int)cam.byDelta(w), (int)cam.byDelta(h), null);
+		}else if(unit instanceof Moskal) {
+			g.drawImage(Img.MOSKAL, (int)cam.getX(x), (int)cam.getY(y), (int)cam.byDelta(w), (int)cam.byDelta(h), null);
 		}
 		if(Settings.showHitboxes) {
-			unit.render(g, R.cam);
+			unit.render(g, cam);
 		}
 	}
 	
