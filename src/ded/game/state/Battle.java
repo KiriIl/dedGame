@@ -8,6 +8,7 @@ import ded.DedAlesya;
 import ded.R;
 import ded.game.effects.StartBattleEffect;
 import ded.game.unit.Unit;
+import ded.Img;
 import framework.game.Camera;
 import framework.game.Effect;
 
@@ -57,18 +58,25 @@ public class Battle implements State{
 			g.drawPolygon(new int[]{490, 495, 490}, new int[]{480+(index*15), 485+(index*15), 490+(index*15)}, 3);
 			
 			//HP Bars
+			g.drawImage(Img.HP_BAR,(int)battleCamera.getX(player.inBattleX+120), (int)battleCamera.getY(player.inBattleY-30), (int)battleCamera.byDelta(129), (int)battleCamera.byDelta(25), null);
+			g.drawImage(Img.HP_BAR,(int)battleCamera.getX(enemy.inBattleX-7),(int)battleCamera.getY(enemy.inBattleY-20),(int)battleCamera.byDelta(129),(int)battleCamera.byDelta(25),null);
 			g.setColor(Color.RED);
-			g.fillRect((int)battleCamera.getX(enemy.inBattleX+10), (int)battleCamera.getY(enemy.inBattleY-10), (int)(int)battleCamera.byDelta((float)enemy.HP/enemy.maxHP*(100)), (int)battleCamera.byDelta(10));
+			g.fillRect((int)battleCamera.getX(enemy.inBattleX+17), (int)battleCamera.getY(enemy.inBattleY-15), (int)battleCamera.byDelta((float)enemy.HP/enemy.maxHP*(101)), (int)battleCamera.byDelta(16));
+			g.setColor(new Color(255,85,85));
+			g.fillRect((int)battleCamera.getX(enemy.inBattleX+17)+(int)battleCamera.byDelta((float)enemy.HP/enemy.maxHP*(101)),(int)battleCamera.getY(enemy.inBattleY-15),(int)battleCamera.byDelta(100)-(int)battleCamera.byDelta((float)enemy.HP/enemy.maxHP*100),(int)battleCamera.byDelta(16));
 			g.setColor(Color.GREEN);
-			g.fillRect((int)battleCamera.getX(player.inBattleX+190), (int)battleCamera.getY(player.inBattleY-10), (int)battleCamera.byDelta((float)player.HP/player.maxHP*(100)), (int)battleCamera.byDelta(10));
+			g.fillRect((int)battleCamera.getX(player.inBattleX+144), (int)battleCamera.getY(player.inBattleY-25), (int)battleCamera.byDelta((float)player.HP/player.maxHP*(101)), (int)battleCamera.byDelta(16));
+			g.setColor(new Color(0,183,0));
+			g.fillRect((int)battleCamera.getX(player.inBattleX+144)+(int)battleCamera.byDelta((float)player.HP/player.maxHP*(101)),(int)battleCamera.getY(player.inBattleY-25),(int)battleCamera.byDelta(100)-(int)battleCamera.byDelta((float)player.HP/player.maxHP*100),(int)battleCamera.byDelta(16));
 			g.setColor(Color.BLACK);
-			g.drawRect((int)battleCamera.getX(enemy.inBattleX+10), (int)battleCamera.getY(enemy.inBattleY-10), (int)battleCamera.byDelta(100), (int)battleCamera.byDelta(10));
-			g.drawRect((int)battleCamera.getX(player.inBattleX+190), (int)battleCamera.getY(player.inBattleY-10), (int)battleCamera.byDelta(100), (int)battleCamera.byDelta(10));
+//			g.drawRect((int)battleCamera.getX(enemy.inBattleX+10), (int)battleCamera.getY(enemy.inBattleY-10), (int)battleCamera.byDelta(100), (int)battleCamera.byDelta(10));
+//			g.drawRect((int)battleCamera.getX(player.inBattleX+190), (int)battleCamera.getY(player.inBattleY-10), (int)battleCamera.byDelta(100), (int)battleCamera.byDelta(10));
 		}else effect.render(g, battleCamera);
 	}
 
 	private boolean playerTurn = true;
 	boolean picked = false;
+	static boolean propusk = false;
 	public void tick() {
 		if(playerTurn) {
 			picked = false;
@@ -88,11 +96,16 @@ public class Battle implements State{
 				player.cast(R.ded.getSkillList().get(index), enemy);
 				playerTurn = false;
 			}else {
+				if (!propusk) {
 				enemy.cast(enemy.getSkillList().get(new Random().nextInt(enemy.getSkillList().size())), player);
 				playerTurn = true;
+				}
+				else {
+					propusk = false;
+					playerTurn = true;
+				}
 			}
 		}
-		
 	}
 	
 	public void superTick() {
@@ -102,6 +115,10 @@ public class Battle implements State{
 			while(DedAlesya.updateThread.isLocked()) DedAlesya.updateThread.unlock();
 		}
 		effect.tick();
+	}
+
+	public static void setPropusk() {
+		propusk = true;
 	}
 	
 }

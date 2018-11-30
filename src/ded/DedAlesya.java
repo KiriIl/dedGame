@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import ded.game.Handler;
 import ded.game.Render;
 import framework.core.dedThread;
+import framework.sound.Sound;
 
 public class DedAlesya {
 
@@ -21,6 +22,7 @@ public class DedAlesya {
 	public static Handler handler;
 	public static dedThread renderThread;
 	public static dedThread updateThread;
+	public static Sound sound;
 	
 	public static void gameFrameUpdate() {
 		gameFrame.pack();

@@ -3,6 +3,7 @@ package ded.game.effects;
 import java.awt.Graphics;
 
 import ded.DedAlesya;
+import ded.Img;
 import ded.R;
 import ded.game.unit.Unit;
 import framework.game.Camera;
@@ -14,7 +15,8 @@ public class StartBattleEffect extends Effect{
 	
 	private Unit enemy;
 	private Unit player;
-	
+	private int posFighterX = DedAlesya.render.getWidth();
+	private int posFighterY = DedAlesya.render.getHeight()/2;
 	public StartBattleEffect(Unit player, Unit enemy) {
 		this.enemy = enemy;
 		this.player = player;
@@ -39,8 +41,9 @@ public class StartBattleEffect extends Effect{
 				ready++;
 			}
 		}
+		if (posFighterX >-170)
+			posFighterX-=10;
 	}
-	
 	@Override
 	public void tick() {
 		if(!isEnded()) {
@@ -49,7 +52,7 @@ public class StartBattleEffect extends Effect{
 					_tick();
 				}
 			}else _tick();
-			if(ready==1) {
+			if(ready==1 && posFighterX <-100) {
 				DedAlesya.updateThread.unlock();
 				stop();
 			}
@@ -58,7 +61,7 @@ public class StartBattleEffect extends Effect{
 
 	@Override
 	public void render(Graphics g, Camera cam) {
-		
+		g.drawImage(Img.FIGHT, posFighterX, posFighterY, 170, 100, null,null);
 	}
 	
 }

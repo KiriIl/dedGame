@@ -1,16 +1,18 @@
 package ded.game.state;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import ded.DedAlesya;
+import ded.Img;
 import ded.R;
 
 public class Settings implements State{
 
 	//!!!!!!!!!!!
 	private int index = 0;
-	
+	public static int voli=0;
 	public static boolean showHitboxes = false;
 	
 	
@@ -70,11 +72,18 @@ public class Settings implements State{
 	
 	@Override
 	public void render(Graphics g) {
+		g.drawImage(Img.SETTINGS, 0, 0, DedAlesya.render.getWidth(), DedAlesya.render.getHeight(),null);
 		g.setColor(Color.WHITE);
-		g.drawString("Resolution: "+getRezo(), 100, 200);
-		g.drawString("Show hitboxes: " + showHitboxes, 100, 215);
-		g.drawString("Back", 100, 230);
-		g.drawPolygon(new int[]{80, 85, 80}, new int[]{190+(index*15), 195+(index*15), 200+(index*15)}, 3);
+		g.drawString(getRezo(), DedAlesya.render.getWidth()/4, DedAlesya.render.getHeight()/4);
+		g.drawString(""+showHitboxes, DedAlesya.render.getWidth()/4, DedAlesya.render.getHeight()/4 + DedAlesya.render.getHeight()/12);
+		g.drawPolygon(new int[]{DedAlesya.render.getWidth()/50-5, DedAlesya.render.getWidth()/50+5, DedAlesya.render.getWidth()/50-5}, new int[]{(DedAlesya.render.getHeight()/4+(index*(DedAlesya.render.getHeight()/12)))-10, DedAlesya.render.getHeight()/4 +(index*(DedAlesya.render.getHeight()/12)), (DedAlesya.render.getHeight()/4+(index*(DedAlesya.render.getHeight()/12)))+10}, 3);
+		for (int volx=0,voly=-5;volx<100;volx+=10,voly-=5) {
+			g.drawRect(DedAlesya.render.getWidth()/4+volx, (DedAlesya.render.getHeight()/4+(2*(DedAlesya.render.getHeight()/12)))+25, 5, voly);
+			if (voli*10<=volx) {
+				g.setColor(Color.DARK_GRAY);
+				g.fillRect(DedAlesya.render.getWidth()/4+volx, (DedAlesya.render.getHeight()/4+(2*(DedAlesya.render.getHeight()/12)))+25, 5+1, voly);
+			}
+		}
 	}
 
 	@Override
@@ -86,10 +95,10 @@ public class Settings implements State{
 		
 		if(R.in.MOVE_DOWN.isClicked()) {
 			index++;
-			if(index>2) index=0;
+			if(index>3) index=0;
 		}else if(R.in.MOVE_UP.isClicked()) {
 			index--;
-			if(index<0) index=2;
+			if(index<0) index=3;
 		}else if(R.in.MOVE_RIGHT.isClicked() || R.in.ACCEPT.isClicked()) {
 			switch(index) {
 			case 0:
@@ -100,7 +109,12 @@ public class Settings implements State{
 			case 1:
 				showHitboxes = !showHitboxes;
 				break;
-			case 2:
+			case 2: 
+				voli++;
+				if (voli>10)
+					voli=0;
+				break;
+			case 3:
 				R.state = 0;
 				break;
 			}

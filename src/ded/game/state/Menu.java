@@ -1,9 +1,11 @@
 package ded.game.state;
 
 import java.awt.Color;
+import ded.DedAlesya;
 import java.awt.Graphics;
 
 import ded.R;
+import ded.Img;
 
 public class Menu implements State{
 
@@ -11,11 +13,12 @@ public class Menu implements State{
 	private int index = 0;
 	
 	public void render(Graphics g) {
+		g.drawImage(Img.MENU,0,0,DedAlesya.render.getWidth(),DedAlesya.render.getHeight(),null);
 		g.setColor(Color.WHITE);
-		g.drawString("Play", 100, 200);
-		g.drawString("Settings", 100, 215);
-		g.drawString("Exit", 100, 230);
-		g.drawPolygon(new int[]{80, 85, 80}, new int[]{190+(index*15), 195+(index*15), 200+(index*15)}, 3);
+//		g.drawString("Play", 100, 200);
+//		g.drawString("Settings", 100, 215);
+//		g.drawString("Exit", 100, 230);
+		g.drawPolygon(new int[]{DedAlesya.render.getWidth()/50-5, DedAlesya.render.getWidth()/50+5, DedAlesya.render.getWidth()/50-5}, new int[]{(DedAlesya.render.getHeight()/4+(index*(DedAlesya.render.getHeight()/12)))-10, DedAlesya.render.getHeight()/4 +(index*(DedAlesya.render.getHeight()/12)), (DedAlesya.render.getHeight()/4+(index*(DedAlesya.render.getHeight()/12)))+10}, 3);
 	}
 	
 	public void tick() {

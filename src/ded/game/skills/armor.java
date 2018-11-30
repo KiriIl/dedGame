@@ -1,6 +1,5 @@
 package ded.game.skills;
 
-import ded.game.effects.SmallHealEffect;
 import ded.game.state.Battle;
 import ded.game.unit.Unit;
 
