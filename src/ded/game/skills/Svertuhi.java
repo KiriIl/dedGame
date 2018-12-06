@@ -1,20 +1,19 @@
 package ded.game.skills;
 
 import ded.Snds;
-import ded.game.state.Battle;
 import ded.game.unit.Unit;
-import framework.sound.Sound;
 
-public class svertuhi implements Skill{
+/**
+ * @author Kirill
+ *
+ */
+public class Svertuhi implements Skill{
 	public void cast(Unit caster, Unit target) {
-		switch (0+(int)(Math.random()*4))
+		if (0+(int)(Math.random()*4) == 0)
 		{
-		case 3: 
 			Snds.sndPunch.snd();
 			Snds.sndPunch.setVolume();
-			target.HP-=7; 
-			break;
-		default: break;
+			target.HP-=7;			
 		}
 		// дед делает вертуху с шансом попадания по цели 25%
 	}

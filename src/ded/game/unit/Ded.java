@@ -1,6 +1,10 @@
 package ded.game.unit;
 
-import ded.game.skills.*;
+import ded.game.skills.HeadPunch;
+import ded.game.skills.Punch;
+import ded.game.skills.SmallHeal;
+import ded.game.skills.Harchok;
+import ded.game.skills.Svertuhi;
 
 public class Ded extends Unit{
 
@@ -10,8 +14,8 @@ public class Ded extends Unit{
 		h = 48;
 		skill.put("Punch", new Punch());
 		skill.put("Navernut' kartoshechki", new SmallHeal());
-		skill.put("Harknut'", new harchok());
-		skill.put("S vertuxi", new svertuhi());
+		skill.put("Harknut'", new Harchok());
+		skill.put("S vertuxi", new Svertuhi());
 		skill.put("Udarit' golovoy",new HeadPunch());
 	}
 	
