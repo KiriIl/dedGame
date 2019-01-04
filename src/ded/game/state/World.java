@@ -48,15 +48,17 @@ public class World implements State{
 			
 			R.cam.x = -(R.ded.x*R.cam.delta-(DedAlesya.render.getWidth()/2-R.ded.w/2*R.cam.delta));
 			R.cam.y = -(R.ded.y*R.cam.delta-(DedAlesya.render.getHeight()/2-R.ded.h/2*R.cam.delta));
-			
-			if(R.test.getDistance(R.ded, true)<=48) {
-				Battle.start(R.ded, R.test);
-				R.ded.x = 100;
-				R.ded.y = 50;
-				R.state = 2;
-				DedAlesya.updateThread.lock();
-				
+			for(Unit obj : R.unit) {
+				if(!obj.equals(R.ded) & obj.getDistance(R.ded, true)<=48) {
+					Battle.start(R.ded, obj);
+					R.ded.x = 100;
+					R.ded.y = 50;
+					R.state = 2;
+					DedAlesya.updateThread.lock();
+					
+				}
 			}
+			
 		}
 	}
 

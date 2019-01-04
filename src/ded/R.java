@@ -1,6 +1,7 @@
 package ded;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ded.game.Input;
 import ded.game.state.Battle;
@@ -32,22 +33,24 @@ public abstract class R {
 	public static Input in = new Input();
 	
 	public static Ded ded = new Ded(0, 0);
-	public static Moskal test = new Moskal(100, 260);
 	public static GameMap map;
 	
 	public static ArrayList<Unit> unit = new ArrayList<Unit>();
 	
 	static {
 		unit.add(ded);
-		unit.add(test);
+		unit.add(new Moskal(90, 220));
+		unit.add(new Moskal(135, 50));
+		unit.add(new Moskal(75, 310));
+		unit.add(new Moskal(350, 333));
 		map = new GameMap(new int[][] {
-			{0,0,0,0,1,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,1,0,0,0,0,0,1,1,1,0},
+			{0,0,0,1,1,0,0,0,0,0,0,0,0,0},
+			{1,0,0,0,1,0,0,0,0,0,0,1,0,0},
+			{1,1,1,0,1,0,0,0,0,0,1,1,1,0},
 			{0,0,0,0,1,0,1,0,0,0,0,0,1,0},
-			{1,0,0,1,1,0,1,0,0,0,1,1,1,0},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,1,1,1,1,0,0,0,0,0,0,0},
+			{1,0,1,1,1,0,1,0,0,0,1,1,1,0},
+			{1,0,0,0,0,0,0,0,1,0,0,0,0,0},
+			{0,1,1,1,1,1,1,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,1,1,1,0,0},
 			{1,1,1,1,1,1,1,0,0,1,0,0,0,0},
 		}, 64, 64);

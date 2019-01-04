@@ -15,6 +15,7 @@ public abstract class Unit extends GameObject{
 	public int HP = 0;
 	protected int defSpeed = 0;
 	public int speed = 0;
+	public boolean propusk = false;
 	
 	public float inBattleX = 0;
 	public float inBattleY = 0;

@@ -1,7 +1,6 @@
 package ded.game.state;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import ded.DedAlesya;
@@ -12,7 +11,7 @@ public class Settings implements State{
 
 	//!!!!!!!!!!!
 	private int index = 0;
-	public static int voli=0;
+	public static int volume=0;
 	public static boolean showHitboxes = false;
 	
 	
@@ -79,7 +78,7 @@ public class Settings implements State{
 		g.drawPolygon(new int[]{DedAlesya.render.getWidth()/50-5, DedAlesya.render.getWidth()/50+5, DedAlesya.render.getWidth()/50-5}, new int[]{(DedAlesya.render.getHeight()/4+(index*(DedAlesya.render.getHeight()/12)))-10, DedAlesya.render.getHeight()/4 +(index*(DedAlesya.render.getHeight()/12)), (DedAlesya.render.getHeight()/4+(index*(DedAlesya.render.getHeight()/12)))+10}, 3);
 		for (int volx=0,voly=-5;volx<100;volx+=10,voly-=5) {
 			g.drawRect(DedAlesya.render.getWidth()/4+volx, (DedAlesya.render.getHeight()/4+(2*(DedAlesya.render.getHeight()/12)))+25, 5, voly);
-			if (voli*10<=volx) {
+			if (volume*10<=volx) {
 				g.setColor(Color.DARK_GRAY);
 				g.fillRect(DedAlesya.render.getWidth()/4+volx, (DedAlesya.render.getHeight()/4+(2*(DedAlesya.render.getHeight()/12)))+25, 5+1, voly);
 			}
@@ -110,9 +109,9 @@ public class Settings implements State{
 				showHitboxes = !showHitboxes;
 				break;
 			case 2: 
-				voli++;
-				if (voli>10)
-					voli=0;
+				volume++;
+				if (volume>10)
+					volume=0;
 				break;
 			case 3:
 				R.state = 0;

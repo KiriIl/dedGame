@@ -1,9 +1,9 @@
 package ded.game.unit;
 
+import ded.game.skills.Harchok;
 import ded.game.skills.HeadPunch;
 import ded.game.skills.Punch;
 import ded.game.skills.SmallHeal;
-import ded.game.skills.Harchok;
 import ded.game.skills.Svertuhi;
 
 public class Ded extends Unit{
@@ -17,6 +17,7 @@ public class Ded extends Unit{
 		skill.put("Harknut'", new Harchok());
 		skill.put("S vertuxi", new Svertuhi());
 		skill.put("Udarit' golovoy",new HeadPunch());
+//		skill.put("tsarap", new Tsarap());
 	}
 	
 }

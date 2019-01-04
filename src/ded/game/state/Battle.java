@@ -5,10 +5,10 @@ import java.awt.Graphics;
 import java.util.Random;
 
 import ded.DedAlesya;
+import ded.Img;
 import ded.R;
 import ded.game.effects.StartBattleEffect;
 import ded.game.unit.Unit;
-import ded.Img;
 import framework.game.Camera;
 import framework.game.Effect;
 
@@ -21,7 +21,7 @@ public class Battle implements State{
 	//!!!!!!!!!!!
 	private int index = 0;
 	private static Camera battleCamera = new Camera();
-	
+//	public static int bleedingCount;
 	public Battle() {
 		
 	}
@@ -33,6 +33,7 @@ public class Battle implements State{
 		Battle.player = player;
 		Battle.enemy = enemy;
 		effect = new StartBattleEffect(player, enemy);
+//		bleedingCount = 0;
 	}
 	
 	public void render(Graphics g) {
@@ -72,11 +73,11 @@ public class Battle implements State{
 //			g.drawRect((int)battleCamera.getX(enemy.inBattleX+10), (int)battleCamera.getY(enemy.inBattleY-10), (int)battleCamera.byDelta(100), (int)battleCamera.byDelta(10));
 //			g.drawRect((int)battleCamera.getX(player.inBattleX+190), (int)battleCamera.getY(player.inBattleY-10), (int)battleCamera.byDelta(100), (int)battleCamera.byDelta(10));
 		}else effect.render(g, battleCamera);
+		
 	}
 
 	private boolean playerTurn = true;
 	boolean picked = false;
-	static boolean propusk = false;
 	public void tick() {
 		if(playerTurn) {
 			picked = false;
@@ -93,15 +94,21 @@ public class Battle implements State{
 		
 		if(picked) {
 			if(playerTurn) {
-				player.cast(R.ded.getSkillList().get(index), enemy);
-				playerTurn = false;
+				if (!player.propusk) {					
+					player.cast(R.ded.getSkillList().get(index), enemy);
+					playerTurn = false;
+				}
+				else {
+					player.propusk = false;
+					playerTurn = false;
+				}
 			}else {
-				if (!propusk) {
+				if (!enemy.propusk) {
 				enemy.cast(enemy.getSkillList().get(new Random().nextInt(enemy.getSkillList().size())), player);
 				playerTurn = true;
 				}
 				else {
-					propusk = false;
+					enemy.propusk = false;
 					playerTurn = true;
 				}
 			}
@@ -111,14 +118,15 @@ public class Battle implements State{
 	public void superTick() {
 		if(R.in.ESC.isClicked() || enemy.HP<=0) {
 			R.state = 1;
+			if(enemy.HP<=0) R.unit.remove(enemy);
+			else {
+				R.ded.x = 0;
+				R.ded.y = 0;
+			}
 			enemy.HP = enemy.maxHP;
 			while(DedAlesya.updateThread.isLocked()) DedAlesya.updateThread.unlock();
 		}
 		effect.tick();
-	}
-
-	public static void setPropusk() {
-		propusk = true;
 	}
 	
 }

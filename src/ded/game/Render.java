@@ -38,20 +38,26 @@ public class Render extends JComponent implements TileDrawer, UnitDrawer, dedRun
 		if(System.getProperty("os.name").toLowerCase().contains("linux")) Toolkit.getDefaultToolkit().sync();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, getWidth(), getHeight());
+	
 		switch(R.state) {
 		case 0:
 			R.menu.render(g);
 			break;
 		case 1:
-			R.world.render(g);
+			synchronized(R.unit) {
+				R.world.render(g);
+			}
 			break;
 		case 2:
-			R.battle.render(g);
+			synchronized(R.unit) {
+				R.battle.render(g);
+			}
 			break;
 		case 3:
 			R.settings.render(g);
 			break;
 		}
+
 	}
 
 	public void tick() {
